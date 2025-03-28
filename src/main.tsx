@@ -7,14 +7,19 @@ import outputs from "../amplify_outputs.json";
 
 Amplify.configure({
   Auth: {
-    region: outputs.auth.region,
-    userPoolId: outputs.auth.userPoolId,
-    userPoolWebClientId: outputs.auth.userPoolWebClientId
+    Cognito: {
+      userPoolId: outputs.auth.userPoolId,
+      userPoolClientId: outputs.auth.userPoolWebClientId,
+      loginWith: {
+        email: true
+      }
+    }
   },
   API: {
     GraphQL: {
       endpoint: outputs.api.endpoint,
-      region: outputs.api.region
+      region: outputs.api.region,
+      defaultAuthMode: 'apiKey'
     }
   }
 });
